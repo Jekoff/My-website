@@ -3,127 +3,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Portfolio</title>
-    <meta name="description" content="Riley Chen — Software Developer specializing in performant single-page applications, accessibility, and modern front-end tooling.">
-    <meta name="color-scheme" content="light dark">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Developer Portfolio — Riley Chen</title>
+    <meta name="description" content="Riley Chen — Software Developer specializing in performant SPAs, accessibility, and modern front-end tooling." />
+    <meta name="color-scheme" content="light dark" />
     <style>
-        :root{
-            --bg: #ffffff;
-            --text: #0f172a;
-            --muted: #475569;
-            --card: #f8fafc;
-            --border: #e2e8f0;
-            --accent: #2563eb;
-            --accent-ink: #ffffff;
-            --shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
-            --radius: 12px;
+        /* ===========================
+           Design Tokens (Mobile-first)
+        ============================ */
+        :root {
+            --bg: #0b0f17;
+            --surface: #0e1420;
+            --text: #e6e9ee;
+            --muted: #a1aec6;
+            --border: #1c2637;
+            --brand-1: #7c6cff;    /* Iris */
+            --brand-2: #22d3ee;    /* Cyan */
+            --brand-3: #ff8a00;    /* Tangerine */
+            --brand-4: #17c964;    /* Emerald */
+            --glow: 0 10px 40px rgba(124,108,255,.25), 0 2px 12px rgba(34,211,238,.18);
+            --shadow: 0 10px 24px rgba(0,0,0,.35);
+            --radius-lg: 18px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
             --maxw: 1080px;
-            --step-0: clamp(0.95rem, 0.32vw + 0.85rem, 1rem);
-            --step-1: clamp(1.1rem, 0.6vw + 0.9rem, 1.25rem);
-            --step-2: clamp(1.35rem, 1vw + 1rem, 1.6rem);
-            --step-3: clamp(1.8rem, 1.5vw + 1.2rem, 2.25rem);
+            --step-0: clamp(0.95rem, 0.30vw + 0.84rem, 1.05rem);
+            --step-1: clamp(1.1rem, 0.65vw + 0.9rem, 1.3rem);
+            --step-2: clamp(1.35rem, 1.1vw + 1rem, 1.7rem);
+            --step-3: clamp(1.75rem, 1.8vw + 1.2rem, 2.3rem);
+            --step-4: clamp(2.2rem, 3vw + 1.4rem, 3.1rem);
+            --ring: 2px solid color-mix(in oklab, var(--brand-2), white 10%);
         }
-        html[data-theme="dark"]{
-            --bg: #0b1220;
-            --text: #e5e7eb;
-            --muted: #9aa4b2;
-            --card: #0f172a;
-            --border: #1f2937;
-            --accent: #60a5fa;
-            --accent-ink: #0b1220;
-            --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.45);
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f7f9fc;
+                --surface: #ffffff;
+                --text: #0b1220;
+                --muted: #475569;
+                --border: #e5eaf2;
+                --glow: 0 10px 40px rgba(124,108,255,.25), 0 2px 12px rgba(34,211,238,.18);
+                --shadow: 0 10px 24px rgba(2,6,23,.08);
+            }
         }
-        *{box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{
-            margin:0;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            background:var(--bg);
-            color:var(--text);
-            line-height:1.6;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
+
+        /* Respect manual theme toggle */
+        html[data-theme="dark"] { color-scheme: dark; }
+        html[data-theme="light"] { color-scheme: light; }
+
+        /* Base */
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            background: radial-gradient(1200px 800px at 10% -10%, rgba(124,108,255,.20), transparent 60%),
+                        radial-gradient(1200px 800px at 120% 10%, rgba(34,211,238,.18), transparent 60%),
+                        var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        a{color:var(--accent); text-decoration: none}
-        a:hover{text-decoration: underline}
-        .container{max-width:var(--maxw); margin-inline:auto; padding:24px clamp(16px,3vw,32px)}
-        header{
-            position:sticky; top:0; backdrop-filter: saturate(180%) blur(8px);
-            background: color-mix(in oklab, var(--bg), transparent 12%);
-            border-bottom:1px solid var(--border);
-            z-index:10;
+        a { color: var(--brand-2); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Utility */
+        .container { max-width: var(--maxw); margin-inline: auto; padding: 20px clamp(16px, 4vw, 28px); }
+        .grid { display: grid; gap: 16px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(34,211,238,.45); border-radius: 10px; }
+
+        /* Top Progress */
+        .progress {
+            position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 100;
+            background: linear-gradient(90deg, var(--brand-2), var(--brand-1), var(--brand-3));
+            transform-origin: 0 50%; transform: scaleX(0);
         }
-        .header-inner{display:flex; align-items:center; gap:16px; justify-content:space-between; max-width:var(--maxw); margin-inline:auto; padding:12px clamp(16px,3vw,32px)}
-        .id-block h1{font-size:var(--step-2); line-height:1.2; margin:0}
-        .id-block p{margin:2px 0 0; color:var(--muted)}
-        .nav{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-        .nav a, .btn{
-            display:inline-flex; align-items:center; gap:8px; padding:.55rem .9rem; border-radius:999px;
-            background:var(--card); border:1px solid var(--border); box-shadow:var(--shadow); font-size:.95rem
+
+        /* Header */
+        header {
+            position: sticky; top: 0; z-index: 99;
+            backdrop-filter: saturate(170%) blur(10px);
+            background: color-mix(in oklab, var(--surface), transparent 20%);
+            border-bottom: 1px solid var(--border);
         }
-        .btn-primary{background:var(--accent); color:var(--accent-ink); border-color:transparent}
-        .btn-icon{padding:.5rem; width:40px; height:40px; justify-content:center}
-        main:focus{outline:none}
-        section{scroll-margin-top:88px; margin-block:28px}
-        h2{font-size:var(--step-2); margin:.2em 0 .6em}
-        .lead{font-size:var(--step-1); color:var(--muted)}
-        .card{
-            background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-            box-shadow:var(--shadow); padding:20px
+        .nav-wrap {
+            max-width: var(--maxw);
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 10px; margin-inline: auto; padding: 10px clamp(16px, 4vw, 28px);
         }
-        .grid{
-            display:grid; gap:16px;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        .brand {
+            display: grid; gap: 4px;
         }
-        .project h3{margin-top:0}
-        .meta{font-size:.95rem; color:var(--muted)}
-        .chips{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0; padding:0; list-style:none}
-        .chip{border:1px solid var(--border); padding:.25rem .55rem; border-radius:999px; background:transparent; font-size:.85rem}
-        ul{padding-left:1.2rem}
-        .toolbar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:12px}
-        .input{
-            padding:.6rem .8rem; border:1px solid var(--border); border-radius:10px; background:var(--card); color:inherit; min-width:220px
+        .brand h1 { margin: 0; font-size: var(--step-2); letter-spacing: 0.2px; }
+        .brand .meta { margin: 0; font-size: .95rem; color: var(--muted); }
+        .nav {
+            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
         }
-        .footer-note{color:var(--muted); font-size:.9rem; text-align:center; margin:28px 0 8px}
-        .sr-only{position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
-        @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
-        @media print{
-            header, .toolbar, .btn, .nav{display:none!important}
-            a{text-decoration:underline}
-            .card{box-shadow:none}
+        .chip, .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: .6rem .9rem; border-radius: 999px; border: 1px solid var(--border);
+            background: color-mix(in oklab, var(--surface), white 2%);
+            font-size: .95rem; box-shadow: var(--shadow);
+            transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
         }
-        /* Focus ring */
-        :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:8px}
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--glow); }
+        .btn-primary { background: linear-gradient(135deg, var(--brand-1), var(--brand-2)); color: #fff; border-color: transparent; }
+        .btn-icon { width: 40px; height: 40px; padding: 0; }
+        .contact a { color: inherit; }
+
+        /* Hero */
+        .hero {
+            position: relative; border-radius: var(--radius-lg);
+            overflow: clip; isolation: isolate; min-height: 58vh;
+            background:
+              radial-gradient(1200px 600px at -10% 80%, rgba(124,108,255,.25), transparent 60%),
+              radial-gradient(1400px 700px at 110% -10%, rgba(34,211,238,.25), transparent 60%),
+              linear-gradient(180deg, color-mix(in oklab, var(--surface), transparent 0%), color-mix(in oklab, var(--surface), black 6%));
+            border: 1px solid var(--border);
+            box-shadow: var(--glow);
+        }
+        .hero-media {
+            position: absolute; inset: 0; z-index: -1; overflow: hidden;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), rgba(0,0,0,.35), transparent 85%);
+        }
+        .hero-media img {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scale(1.06); filter: saturate(1.1) contrast(1.05) brightness(.9);
+            animation: heroPan 18s ease-in-out infinite alternate;
+        }
+        @keyframes heroPan {
+            0% { transform: scale(1.05) translateY(-1%); }
+            100% { transform: scale(1.08) translateY(1.5%); }
+        }
+        .hero-inner {
+            padding: clamp(20px, 6vw, 48px);
+            display: grid; gap: 14px; align-content: end; min-height: 58vh;
+        }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: .35rem .7rem; border-radius: 999px;
+            background: color-mix(in oklab, var(--surface), white 2%);
+            border: 1px dashed color-mix(in oklab, var(--brand-2), var(--brand-1) 40%);
+            color: var(--muted); font-size: .9rem;
+        }
+        .title {
+            font-size: var(--step-4);
+            line-height: 1.1; margin: .1em 0;
+            background: linear-gradient(90deg, var(--brand-2), var(--brand-1), var(--brand-3));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            text-wrap: balance;
+        }
+        .lead { font-size: var(--step-1); color: var(--muted); max-width: 65ch; }
+
+        .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+
+        /* Section Headings */
+        section { margin-block: clamp(20px, 6vw, 42px); scroll-margin-top: 90px; }
+        h2 { font-size: var(--step-3); margin: .2em 0 .6em; letter-spacing: .3px; }
+
+        /* Cards (animated, interactive) */
+        .card {
+            background: color-mix(in oklab, var(--surface), white 2%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: clamp(16px, 3.6vw, 22px);
+            position: relative; overflow: clip;
+            box-shadow: var(--shadow);
+            transform-style: preserve-3d;
+            transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, background .35s ease, border-color .35s ease;
+            will-change: transform;
+        }
+        .card::before {
+            content: "";
+            position: absolute; inset: -1px;
+            background: conic-gradient(from 180deg at 50% 50%, color-mix(in oklab, var(--brand-2), white 8%), transparent 30%, color-mix(in oklab, var(--brand-1), white 10%), transparent 60%, color-mix(in oklab, var(--brand-3), white 12%));
+            filter: blur(12px); opacity: .0; transition: opacity .35s ease;
+            pointer-events: none;
+        }
+        .card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--glow);
+            border-color: color-mix(in oklab, var(--brand-2), var(--border) 50%);
+            background: color-mix(in oklab, var(--surface), white 4%);
+        }
+        .card:hover::before { opacity: .7; }
+        .card[data-tilt] { perspective: 900px; }
+
+        /* Project Grid */
+        #projects .grid {
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 740px) {
+            #projects .grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            #projects .grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .project h3 { margin: 8px 0 6px; font-size: var(--step-1); }
+        .meta { color: var(--muted); font-size: .95rem; }
+
+        .project-media {
+            aspect-ratio: 16 / 9; border-radius: calc(var(--radius-md) - 6px);
+            overflow: clip; border: 1px solid var(--border); margin: -6px -6px 12px; position: relative;
+            transform: translateZ(0);
+        }
+        .project-media img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transform: scale(1.02); transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .4s ease;
+            filter: saturate(1.05) contrast(1.05);
+        }
+        .card:hover .project-media img { transform: scale(1.06); }
+
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+        .chip {
+            border: 1px solid var(--border); background: color-mix(in oklab, var(--surface), white 1%);
+            padding: .35rem .6rem; border-radius: 999px; font-size: .85rem; color: var(--muted);
+            transition: transform .2s ease, background .2s ease, border-color .2s ease;
+        }
+        .chip:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--surface), white 4%); border-color: color-mix(in oklab, var(--brand-2), var(--border) 50%); }
+
+        /* Toolbar */
+        .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+        .input {
+            padding: .65rem .8rem; border: 1px solid var(--border); border-radius: 12px;
+            background: color-mix(in oklab, var(--surface), white 2%); color: inherit; min-width: 220px;
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+        .input:focus { border-color: color-mix(in oklab, var(--brand-2), var(--border) 55%); box-shadow: 0 0 0 3px rgba(34,211,238,.2); }
+
+        /* Lists & Content Cards */
+        ul { padding-left: 1.1rem; }
+        #skills .card ul, #experience .card ul { margin: 0; }
+        #skills .card li + li, #experience .card li + li { margin-top: .4rem; }
+
+        /* Reveal-on-scroll */
+        .reveal { opacity: 0; transform: translateY(22px); }
+        .reveal.in { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+
+        /* Footer */
+        .footer-note { color: var(--muted); font-size: .95rem; text-align: center; margin: 22px 0 10px; }
+        .backtotop { display: inline-block; margin: 6px auto 18px; }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .hero-media img, .card, .project-media img, .btn, .chip { transition: none !important; animation: none !important; }
+            .card:hover { transform: none; }
+        }
+
+        /* Print */
+        @media print {
+            header, .toolbar, .btn, .chip, .hero-media, .progress { display: none !important; }
+            .card, .hero { box-shadow: none !important; }
+            a { text-decoration: underline; }
+        }
     </style>
 </head>
 <body>
-    <a href="#about" class="sr-only">Skip to content</a>
+    <div class="progress" id="progressbar" aria-hidden="true"></div>
 
     <!-- Header Section -->
     <header>
-        <div class="header-inner">
-            <div class="id-block">
+        <div class="nav-wrap">
+            <div class="brand">
                 <h1>Name: Riley Chen</h1>
-                <p>Profession: Software Developer</p>
-                <p class="meta">Contact: <a href="mailto:riley.chen.dev@example.com">riley.chen.dev@example.com</a> |
+                <p class="meta">Profession: Software Developer</p>
+                <p class="meta contact">
+                    Contact:
+                    <a href="mailto:riley.chen.dev@example.com">riley.chen.dev@example.com</a> |
                     <a href="https://linkedin.com/in/rileychen" target="_blank" rel="noopener">LinkedIn</a> |
-                    <a href="https://github.com/rileychen" target="_blank" rel="noopener">GitHub</a></p>
+                    <a href="https://github.com/rileychen" target="_blank" rel="noopener">GitHub</a>
+                </p>
             </div>
             <nav class="nav" aria-label="Primary">
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#skills">Skills</a>
-                <a href="#experience">Experience</a>
+                <a class="chip" href="#about">About</a>
+                <a class="chip" href="#projects">Projects</a>
+                <a class="chip" href="#skills">Skills</a>
+                <a class="chip" href="#experience">Experience</a>
                 <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">🌓</button>
             </nav>
         </div>
     </header>
 
     <main id="top" class="container" tabindex="-1">
+        <!-- HERO -->
+        <section class="hero reveal" data-tilt>
+            <div class="hero-media" aria-hidden="true">
+                <!-- Stock photo hero (Unsplash) -->
+                <picture>
+                    <source srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2200&q=80" media="(min-width:1200px)" />
+                    <source srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80" media="(min-width:700px)" />
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80"
+                         alt="Laptop with code editor open on desk"
+                         width="2200" height="1200" decoding="async" loading="eager" />
+                </picture>
+            </div>
+            <div class="hero-inner">
+                <span class="eyebrow">Performance-first • A11y • DX</span>
+                <h2 class="title">I build fast, beautiful single‑page apps with modern, maintainable code.</h2>
+                <p class="lead">From design systems and micro‑frontends to PWAs and CI pipelines, I ship resilient experiences that meet business goals and delight users. Let’s turn complex problems into elegant interfaces—without sacrificing speed or accessibility.</p>
+                <div class="hero-cta">
+                    <a class="btn btn-primary" href="#projects">See Projects</a>
+                    <a class="btn" href="mailto:riley.chen.dev@example.com">Get in touch</a>
+                </div>
+            </div>
+        </section>
+
         <!-- About Section -->
-        <section id="about" class="card">
+        <section id="about" class="card reveal" data-tilt>
             <h2>About</h2>
             <p>
                 I’m a software developer focused on building fast, accessible single‑page applications that scale.
@@ -137,7 +328,7 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects">
+        <section id="projects" class="reveal">
             <h2>Projects</h2>
 
             <div class="toolbar" role="region" aria-label="Project filters">
@@ -147,8 +338,17 @@
             </div>
 
             <div class="grid" id="projectList" aria-live="polite">
-                <!-- Project entries go here -->
-                <article class="project card" data-tech="typescript web-components lighthouse ci vite github-actions performance">
+                <!-- Project 1 -->
+                <article class="project card reveal" data-tilt data-tech="typescript web-components lighthouse ci vite github-actions performance">
+                    <div class="project-media" aria-hidden="true">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80" media="(min-width:1024px)" />
+                            <source srcset="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=80" media="(min-width:640px)" />
+                            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&q=80"
+                                 alt="Developer writing code on multiple monitors"
+                                 loading="lazy" decoding="async" width="1400" height="788" />
+                        </picture>
+                    </div>
                     <h3>Project Name: PerfWatch — Lighthouse CI Dashboard</h3>
                     <p>
                         A zero‑dependency dashboard that collects Lighthouse scores in CI and highlights regressions over time.
@@ -163,7 +363,17 @@
                     </ul>
                 </article>
 
-                <article class="project card" data-tech="html css javascript accessibility spa template performance">
+                <!-- Project 2 -->
+                <article class="project card reveal" data-tilt data-tech="html css javascript accessibility spa template performance">
+                    <div class="project-media" aria-hidden="true">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80" media="(min-width:1024px)" />
+                            <source srcset="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80" media="(min-width:640px)" />
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80"
+                                 alt="Team collaborating over design and code"
+                                 loading="lazy" decoding="async" width="1400" height="788" />
+                        </picture>
+                    </div>
                     <h3>Project Name: Devfolio — Single‑File Portfolio Template</h3>
                     <p>
                         A performance‑first portfolio in one HTML file (this project). It ships with system fonts, no image
@@ -178,7 +388,17 @@
                     </ul>
                 </article>
 
-                <article class="project card" data-tech="pwa vanilla-js indexeddb dnd accessibility offline">
+                <!-- Project 3 -->
+                <article class="project card reveal" data-tilt data-tech="pwa vanilla-js indexeddb dnd accessibility offline">
+                    <div class="project-media" aria-hidden="true">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1400&q=80" media="(min-width:1024px)" />
+                            <source srcset="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=900&q=80" media="(min-width:640px)" />
+                            <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=700&q=80"
+                                 alt="Electronics kit and code on screen"
+                                 loading="lazy" decoding="async" width="1400" height="788" />
+                        </picture>
+                    </div>
                     <h3>Project Name: TaskTrackr — Kanban PWA</h3>
                     <p>
                         An offline‑first Kanban board with drag‑and‑drop, keyboard navigation, and instant search. Uses
@@ -196,83 +416,95 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="card">
+        <section id="skills" class="reveal">
             <h2>Skills</h2>
-            <ul>
-                <!-- List your technical skills here -->
-                <li>Programming Languages: TypeScript, JavaScript (ES6+), HTML5, CSS3, SQL, Python</li>
-                <li>Frameworks: React, Vue, Svelte, Node.js/Express, Next.js, Astro</li>
-                <li>Libraries: Web Components, Lit, Redux Toolkit, TanStack Query, D3.js, Playwright</li>
-                <li>Tools: Git, Vite, esbuild, Webpack, Docker, GitHub Actions, Jest/Vitest, Cypress, Lighthouse</li>
-            </ul>
+            <div class="card" data-tilt>
+                <ul>
+                    <li>Programming Languages: TypeScript, JavaScript (ES6+), HTML5, CSS3, SQL, Python</li>
+                    <li>Frameworks: React, Vue, Svelte, Node.js/Express, Next.js, Astro</li>
+                    <li>Libraries: Web Components, Lit, Redux Toolkit, TanStack Query, D3.js, Playwright</li>
+                    <li>Tools: Git, Vite, esbuild, Webpack, Docker, GitHub Actions, Jest/Vitest, Cypress, Lighthouse</li>
+                </ul>
+            </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="card">
+        <section id="experience" class="reveal">
             <h2>Experience</h2>
-            <ul>
-                <!-- Outline your work experience in reverse chronological order -->
-                <li><strong>Senior Frontend Engineer</strong>, Arcadia Systems — <em>2022 &ndash; Present</em>
-                    <ul>
-                        <li>Led migration to a modular design system and micro‑frontends; reduced initial bundle by 38% and improved LCP by 28%.</li>
-                        <li>Implemented Lighthouse CI and performance budgets; prevented regressions across 20+ SPAs.</li>
-                        <li>Mentored team on a11y and TypeScript best practices; introduced automated a11y checks in CI.</li>
-                    </ul>
-                </li>
-                <li><strong>Frontend Engineer</strong>, TechNova Labs — <em>2019 &ndash; 2022</em>
-                    <ul>
-                        <li>Built data‑heavy dashboards with React and Web Components, integrating real‑time streams.</li>
-                        <li>Shipped a PWA for field teams with offline sync, cutting support tickets by 45%.</li>
-                        <li>Owned E2E testing strategy with Playwright, increasing coverage to 90%+ on critical flows.</li>
-                    </ul>
-                </li>
-                <li><strong>Software Developer</strong>, Freelance/Contract — <em>2016 &ndash; 2019</em>
-                    <ul>
-                        <li>Delivered bespoke SPAs for startups; focused on performance, accessibility, and maintainable code.</li>
-                        <li>Set up CI/CD pipelines, monitoring, and error reporting to accelerate feedback loops.</li>
-                    </ul>
-                </li>
-                <!-- Add more experience entries as needed -->
-            </ul>
+            <div class="card" data-tilt>
+                <ul>
+                    <li><strong>Senior Frontend Engineer</strong>, Arcadia Systems — <em>2022 &ndash; Present</em>
+                        <ul>
+                            <li>Led migration to a modular design system and micro‑frontends; reduced initial bundle by 38% and improved LCP by 28%.</li>
+                            <li>Implemented Lighthouse CI and performance budgets; prevented regressions across 20+ SPAs.</li>
+                            <li>Mentored team on a11y and TypeScript best practices; introduced automated a11y checks in CI.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Frontend Engineer</strong>, TechNova Labs — <em>2019 &ndash; 2022</em>
+                        <ul>
+                            <li>Built data‑heavy dashboards with React and Web Components, integrating real‑time streams.</li>
+                            <li>Shipped a PWA for field teams with offline sync, cutting support tickets by 45%.</li>
+                            <li>Owned E2E testing strategy with Playwright, increasing coverage to 90%+ on critical flows.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Software Developer</strong>, Freelance/Contract — <em>2016 &ndash; 2019</em>
+                        <ul>
+                            <li>Delivered bespoke SPAs for startups; focused on performance, accessibility, and maintainable code.</li>
+                            <li>Set up CI/CD pipelines, monitoring, and error reporting to accelerate feedback loops.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </section>
 
-        <p class="footer-note">© <span id="year"></span> Riley Chen — Built with HTML, CSS, and a sprinkle of JS. No external assets.</p>
-        <p class="footer-note"><a class="btn" href="#top">Back to top ↑</a></p>
+        <p class="footer-note">© <span id="year"></span> Riley Chen — Built with HTML, CSS, and a sprinkle of JS. Stock photos via Unsplash.</p>
+        <p class="footer-note"><a class="btn backtotop" href="#top">Back to top ↑</a></p>
     </main>
 
     <noscript>
         <div class="container card" role="note" aria-live="polite">
-            JavaScript is disabled. The site remains fully usable, but search and theme toggling are unavailable.
+            JavaScript is disabled. The site remains fully usable, but search, reveal effects, and theme toggling are unavailable.
         </div>
     </noscript>
 
     <script>
         // --- Theme: system preference + localStorage ---
-        (function(){
+        (function () {
             const root = document.documentElement;
             const key = 'theme-preference';
             const saved = localStorage.getItem(key);
             const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const current = saved ?? (systemDark ? 'dark' : 'light');
+            const initial = saved ?? (systemDark ? 'dark' : 'light');
             const apply = t => { root.setAttribute('data-theme', t); localStorage.setItem(key, t); };
-
-            apply(current);
+            apply(initial);
             document.getElementById('themeToggle')?.addEventListener('click', () => {
                 apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
             });
-            // reflect system changes if user hasn't chosen
             if (saved == null && window.matchMedia) {
                 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => apply(e.matches ? 'dark' : 'light'));
             }
         })();
 
+        // --- Scroll progress indicator ---
+        (function () {
+            const bar = document.getElementById('progressbar');
+            const set = () => {
+                const h = document.documentElement;
+                const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+                bar.style.transform = `scaleX(${Math.max(0, Math.min(1, scrolled))})`;
+            };
+            set();
+            window.addEventListener('scroll', set, { passive: true });
+            window.addEventListener('resize', set);
+        })();
+
         // --- Projects: simple client-side filter (text + tech tags) ---
-        (function(){
+        (function () {
             const input = document.getElementById('projectSearch');
             const clear = document.getElementById('clearSearch');
-            const list  = document.getElementById('projectList');
+            const list = document.getElementById('projectList');
+            if (!list) return;
             const cards = Array.from(list.querySelectorAll('.project'));
-
             const filter = (q) => {
                 const needle = q.trim().toLowerCase();
                 cards.forEach(card => {
@@ -280,9 +512,54 @@
                     card.style.display = hay.includes(needle) ? '' : 'none';
                 });
             };
-
             input?.addEventListener('input', (e) => filter(e.target.value));
-            clear?.addEventListener('click', () => { input.value=''; filter(''); input.focus(); });
+            clear?.addEventListener('click', () => { input.value = ''; filter(''); input.focus(); });
+        })();
+
+        // --- Reveal on scroll (Intersection Observer) ---
+        (function () {
+            const revealables = Array.from(document.querySelectorAll('.reveal'));
+            if (!('IntersectionObserver' in window) || revealables.length === 0) {
+                revealables.forEach(el => el.classList.add('in'));
+                return;
+            }
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+            revealables.forEach(el => io.observe(el));
+        })();
+
+        // --- Subtle tilt on hover (cards & hero) ---
+        (function () {
+            const supportsRM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (supportsRM) return;
+            const els = document.querySelectorAll('[data-tilt]');
+            els.forEach(el => {
+                let raf = 0;
+                const strength = 8; // max deg
+                const onMove = (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    const dx = (e.clientX - cx) / (rect.width / 2);
+                    const dy = (e.clientY - cy) / (rect.height / 2);
+                    cancelAnimationFrame(raf);
+                    raf = requestAnimationFrame(() => {
+                        el.style.transform = `rotateX(${(-dy * strength).toFixed(2)}deg) rotateY(${(dx * strength).toFixed(2)}deg) translateY(-2px)`;
+                    });
+                };
+                const reset = () => {
+                    cancelAnimationFrame(raf);
+                    el.style.transform = '';
+                };
+                el.addEventListener('mousemove', onMove);
+                el.addEventListener('mouseleave', reset);
+            });
         })();
 
         // --- Footer year ---
