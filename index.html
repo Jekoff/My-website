@@ -1,292 +1,577 @@
-<!-- Single HTML File Developer Portfolio -->
+<!-- Apple‑Style Bento Portfolio — Single HTML File (Mobile‑first) -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Portfolio</title>
-    <meta name="description" content="Riley Chen — Software Developer specializing in performant single-page applications, accessibility, and modern front-end tooling.">
-    <meta name="color-scheme" content="light dark">
-    <style>
-        :root{
-            --bg: #ffffff;
-            --text: #0f172a;
-            --muted: #475569;
-            --card: #f8fafc;
-            --border: #e2e8f0;
-            --accent: #2563eb;
-            --accent-ink: #ffffff;
-            --shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
-            --radius: 12px;
-            --maxw: 1080px;
-            --step-0: clamp(0.95rem, 0.32vw + 0.85rem, 1rem);
-            --step-1: clamp(1.1rem, 0.6vw + 0.9rem, 1.25rem);
-            --step-2: clamp(1.35rem, 1vw + 1rem, 1.6rem);
-            --step-3: clamp(1.8rem, 1.5vw + 1.2rem, 2.25rem);
-        }
-        html[data-theme="dark"]{
-            --bg: #0b1220;
-            --text: #e5e7eb;
-            --muted: #9aa4b2;
-            --card: #0f172a;
-            --border: #1f2937;
-            --accent: #60a5fa;
-            --accent-ink: #0b1220;
-            --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.45);
-        }
-        *{box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{
-            margin:0;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            background:var(--bg);
-            color:var(--text);
-            line-height:1.6;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
-        }
-        a{color:var(--accent); text-decoration: none}
-        a:hover{text-decoration: underline}
-        .container{max-width:var(--maxw); margin-inline:auto; padding:24px clamp(16px,3vw,32px)}
-        header{
-            position:sticky; top:0; backdrop-filter: saturate(180%) blur(8px);
-            background: color-mix(in oklab, var(--bg), transparent 12%);
-            border-bottom:1px solid var(--border);
-            z-index:10;
-        }
-        .header-inner{display:flex; align-items:center; gap:16px; justify-content:space-between; max-width:var(--maxw); margin-inline:auto; padding:12px clamp(16px,3vw,32px)}
-        .id-block h1{font-size:var(--step-2); line-height:1.2; margin:0}
-        .id-block p{margin:2px 0 0; color:var(--muted)}
-        .nav{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-        .nav a, .btn{
-            display:inline-flex; align-items:center; gap:8px; padding:.55rem .9rem; border-radius:999px;
-            background:var(--card); border:1px solid var(--border); box-shadow:var(--shadow); font-size:.95rem
-        }
-        .btn-primary{background:var(--accent); color:var(--accent-ink); border-color:transparent}
-        .btn-icon{padding:.5rem; width:40px; height:40px; justify-content:center}
-        main:focus{outline:none}
-        section{scroll-margin-top:88px; margin-block:28px}
-        h2{font-size:var(--step-2); margin:.2em 0 .6em}
-        .lead{font-size:var(--step-1); color:var(--muted)}
-        .card{
-            background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-            box-shadow:var(--shadow); padding:20px
-        }
-        .grid{
-            display:grid; gap:16px;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-        .project h3{margin-top:0}
-        .meta{font-size:.95rem; color:var(--muted)}
-        .chips{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0; padding:0; list-style:none}
-        .chip{border:1px solid var(--border); padding:.25rem .55rem; border-radius:999px; background:transparent; font-size:.85rem}
-        ul{padding-left:1.2rem}
-        .toolbar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:12px}
-        .input{
-            padding:.6rem .8rem; border:1px solid var(--border); border-radius:10px; background:var(--card); color:inherit; min-width:220px
-        }
-        .footer-note{color:var(--muted); font-size:.9rem; text-align:center; margin:28px 0 8px}
-        .sr-only{position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
-        @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
-        @media print{
-            header, .toolbar, .btn, .nav{display:none!important}
-            a{text-decoration:underline}
-            .card{box-shadow:none}
-        }
-        /* Focus ring */
-        :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:8px}
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Je Koff — Portfolio & CV</title>
+  <meta name="description" content="Apple‑style, bento grid portfolio & CV for an IT/Software Developer. Mobile‑first, fast, accessible, and elegant." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <style>
+    /* =============================================================
+       Design System — Apple‑inspired, mobile‑first, bento aesthetic
+       ============================================================= */
+    :root{
+      /* Palette */
+      --bg: #090a0f;            /* deep space */
+      --bg-2: #0e1117;          /* card backdrop */
+      --text: #e6e8ec;          /* primary text */
+      --muted: #a4adbb;         /* secondary text */
+      --line: rgba(255,255,255,.12);
+      --brandA: #7c6cff;        /* iris */
+      --brandB: #22d3ee;        /* cyan */
+      --brandC: #17c964;        /* emerald */
+      --brandD: #ff8a00;        /* tangerine */
+      --grad-1: conic-gradient(from 180deg at 50% 50%, rgba(124,108,255,.5), rgba(34,211,238,.35), rgba(23,201,100,.35), rgba(255,138,0,.35));
+
+      /* Surfaces */
+      --surface: color-mix(in oklab, var(--bg-2), white 4%);
+      --frost: color-mix(in oklab, var(--bg-2), white 6%);
+
+      /* Elevation & Rounding */
+      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 2px 10px rgba(0,0,0,.25);
+      --glow: 0 10px 40px rgba(124,108,255,.22), 0 2px 12px rgba(34,211,238,.18);
+      --r-lg: 22px; --r-md: 18px; --r-sm: 12px; --r-xs: 10px;
+
+      /* Type scale */
+      --t-0: clamp(.96rem, .22vw + .9rem, 1.05rem);
+      --t-1: clamp(1.10rem, .55vw + .95rem, 1.30rem);
+      --t-2: clamp(1.35rem, 1vw + 1rem, 1.7rem);
+      --t-3: clamp(1.85rem, 1.9vw + 1.2rem, 2.5rem);
+      --t-4: clamp(2.35rem, 3.2vw + 1.4rem, 3.4rem);
+
+      --maxw: 1200px;
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f6f7fb; --bg-2: #ffffff; --text: #0b1220; --muted: #556175; --line: rgba(0,0,0,.12);
+        --surface: color-mix(in oklab, var(--bg-2), black 1%);
+        --frost: color-mix(in oklab, var(--bg-2), black 3%);
+        --shadow: 0 10px 30px rgba(2,6,23,.10), 0 2px 10px rgba(2,6,23,.06);
+      }
+    }
+
+    /* Base */
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:var(--text); background:
+        radial-gradient(1100px 600px at 15% -10%, rgba(124,108,255,.25), transparent 60%),
+        radial-gradient(1100px 700px at 120% 10%, rgba(34,211,238,.20), transparent 60%),
+        linear-gradient(180deg, color-mix(in oklab, var(--bg), black 0%), color-mix(in oklab, var(--bg), black 6%));
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.65;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a{color:var(--brandB); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%; display:block}
+    :focus-visible{outline:2px solid color-mix(in oklab, var(--brandB), white 10%); outline-offset:2px; border-radius:10px}
+    .sr-only{position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+
+    .shell{max-width:var(--maxw); margin-inline:auto; padding:20px clamp(16px,4vw,28px)}
+
+    /* Top Nav (glass, sticky) */
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(160%) blur(10px);
+      background: color-mix(in oklab, var(--bg-2), transparent 20%);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0}
+    .brand{display:grid; gap:2px}
+    .brand h1{margin:0; font-size:var(--t-2); letter-spacing:.2px}
+    .brand p{margin:0; color:var(--muted)}
+    .navlinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+    .chip,.btn{
+      display:inline-flex; align-items:center; gap:8px; padding:.6rem .9rem; border-radius:999px; border:1px solid var(--line);
+      background: var(--frost); box-shadow:var(--shadow); font-size:.95rem;
+      transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    }
+    .btn:hover,.chip:hover{transform:translateY(-2px); box-shadow:var(--glow)}
+    .btn-primary{background: linear-gradient(135deg, var(--brandA), var(--brandB)); color:#fff; border-color:transparent}
+
+    /* Modern nav links */
+    .navlinks a{
+      position:relative;
+      background: color-mix(in oklab, var(--frost), white 2%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .55rem .9rem;
+      backdrop-filter: saturate(150%) blur(4px);
+      transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, color .25s ease;
+    }
+    .navlinks a::after{
+      content:"";
+      position:absolute; left:12px; right:12px; bottom:6px; height:2px;
+      background: linear-gradient(90deg, var(--brandB), var(--brandA));
+      border-radius:2px; opacity:0; transform: scaleX(.6);
+      transition: opacity .25s ease, transform .25s cubic-bezier(.2,.7,.2,1);
+    }
+    .navlinks a:hover{ transform: translateY(-2px); box-shadow: var(--glow); }
+    .navlinks a:hover::after, .navlinks a.active::after{ opacity:1; transform: scaleX(1); }
+    .navlinks a.active{ color: #fff; background: linear-gradient(180deg, color-mix(in oklab, var(--bg-2), white 4%), color-mix(in oklab, var(--bg-2), black 6%)); }
+
+    header.scrolled{ background: color-mix(in oklab, var(--bg-2), transparent 10%); border-bottom-color: color-mix(in oklab, var(--brandB), var(--line) 60%); }
+
+    /* Hero */
+    .hero{
+      position:relative; border-radius:var(--r-lg); overflow:clip; isolation:isolate; min-height:62vh; box-shadow:var(--glow); border:1px solid var(--line);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--bg-2), white 2%), color-mix(in oklab, var(--bg-2), black 5%));
+    }
+    .hero-media{position:absolute; inset:0; z-index:-1; opacity:.9; mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.5) 60%, transparent 95%)}
+    .hero-media img{width:100%; height:100%; object-fit:cover; filter:saturate(1.05) contrast(1.05) brightness(.9); transform:scale(1.06)}
+    .hero-inner{padding: clamp(20px, 6vw, 48px); display:grid; gap:14px; align-content:end; min-height:62vh}
+    .eyebrow{display:inline-flex; align-items:center; gap:8px; padding:.35rem .7rem; border-radius:999px; background:var(--frost); border:1px dashed color-mix(in oklab, var(--brandB), var(--brandA) 35%); color:var(--muted); font-size:.9rem}
+    .title{font-size:var(--t-4); line-height:1.08; margin:.1em 0; background:linear-gradient(90deg, var(--brandB), var(--brandA), var(--brandD)); -webkit-background-clip:text; background-clip:text; color:transparent; text-wrap:balance}
+    .lead{font-size:var(--t-1); color:var(--muted); max-width:65ch}
+    .hero-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+
+    /* Bento Grid */
+    .bento{display:grid; gap:12px; grid-template-columns: 1fr}
+    @media (min-width:720px){ .bento{ grid-template-columns: repeat(6, 1fr) } }
+
+    .tile{
+      position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:16px; overflow:clip; box-shadow:var(--shadow);
+      transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease, background .35s ease;
+    }
+    .tile:hover{transform: translateY(-6px) scale(1.01); box-shadow: var(--glow); border-color: color-mix(in oklab, var(--brandB), var(--line) 50%); background: color-mix(in oklab, var(--surface), white 3%)}
+    .tile::after{content:""; position:absolute; inset:-1px; background:var(--grad-1); filter:blur(16px); opacity:0; transition:opacity .35s ease; pointer-events:none}
+    .tile:hover::after{opacity:.6}
+
+    .span-2{grid-column: span 2}
+    .span-3{grid-column: span 3}
+    .span-4{grid-column: span 4}
+    .span-6{grid-column: span 6}
+    @media (max-width:719px){ .span-2,.span-3,.span-4,.span-6{grid-column: span 1} }
+
+    .stat{font-size: clamp(1.6rem, 2.4vw + 1rem, 2.4rem); font-weight:700}
+    .muted{color:var(--muted)}
+
+    /* Cards common */
+    .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:clamp(14px,3vw,22px); box-shadow:var(--shadow); overflow:clip; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease, background .35s ease}
+    .card:hover{transform: translateY(-6px) scale(1.01); box-shadow: var(--glow); border-color: color-mix(in oklab, var(--brandB), var(--line) 50%); background: color-mix(in oklab, var(--surface), white 3%)}
+
+    h2{font-size:var(--t-3); margin:.2em 0 .6em; letter-spacing:.3px}
+    h3{font-size:var(--t-1); margin:.6em 0 .4em}
+
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 0; padding:0; list-style:none}
+    .chip{border:1px solid var(--line); background:var(--frost); padding:.35rem .6rem; border-radius:999px; font-size:.85rem; color:var(--muted)}
+
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px}
+    .input{padding:.65rem .8rem; border:1px solid var(--line); border-radius:12px; background:var(--frost); color:inherit; min-width:220px}
+
+    /* Project media */
+    .project-media{aspect-ratio: 16/9; border-radius: calc(var(--r-md) - 6px); overflow:clip; border:1px solid var(--line); margin: -4px -4px 10px; position:relative}
+    .project-media img{width:100%; height:100%; object-fit:cover; transform:scale(1.02); transition: transform .6s cubic-bezier(.2,.7,.2,1)}
+    .card:hover .project-media img{transform:scale(1.06)}
+
+    /* Experience timeline */
+    .timeline{position:relative; margin:0; padding:0; list-style:none}
+    .timeline::before{content:""; position:absolute; left:.55rem; top:0; bottom:0; width:2px; background:var(--line)}
+    .timeline li{position:relative; padding-left:1.6rem; margin-bottom:1rem}
+    .timeline li::before{content:""; position:absolute; left:0; top:.3rem; width:.8rem; height:.8rem; border-radius:999px; background:linear-gradient(135deg,var(--brandA),var(--brandB)); box-shadow:0 0 0 4px color-mix(in oklab, var(--brandB), transparent 80%)}
+
+    /* CV (print‑ready) */
+    .cv{display:grid; gap:12px; grid-template-columns:1fr}
+    @media (min-width:820px){ .cv{ grid-template-columns: 2fr 1fr } }
+    .cv h3{margin-top:0}
+
+    .footer{color:var(--muted); text-align:center; font-size:.95rem; margin:22px 0 10px}
+
+    /* Progress bar */
+    .progress{position:fixed; inset:0 0 auto 0; height:3px; z-index:100; background:linear-gradient(90deg,var(--brandB),var(--brandA),var(--brandD)); transform-origin:0 50%; transform:scaleX(0)}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .card,.tile,.btn,.chip,.project-media img{transition:none!important} }
+
+    /* Print */
+    @media print{
+      header, .progress, .toolbar, .btn, .chip, .hero-media{ display:none!important }
+      .hero, .card{ box-shadow:none }
+      .shell{ max-width: 900px }
+      a{ text-decoration: underline }
+    }
+  </style>
 </head>
 <body>
-    <a href="#about" class="sr-only">Skip to content</a>
+  <div id="progressbar" class="progress" aria-hidden="true"></div>
+  <a href="#about" class="sr-only">Skip to content</a>
 
-    <!-- Header Section -->
-    <header>
-        <div class="header-inner">
-            <div class="id-block">
-                <h1>Name: Riley Chen</h1>
-                <p>Profession: Software Developer</p>
-                <p class="meta">Contact: <a href="mailto:riley.chen.dev@example.com">riley.chen.dev@example.com</a> |
-                    <a href="https://linkedin.com/in/rileychen" target="_blank" rel="noopener">LinkedIn</a> |
-                    <a href="https://github.com/rileychen" target="_blank" rel="noopener">GitHub</a></p>
-            </div>
-            <nav class="nav" aria-label="Primary">
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#skills">Skills</a>
-                <a href="#experience">Experience</a>
-                <button class="btn btn-icon" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">🌓</button>
-            </nav>
+  <!-- Header -->
+  <header>
+    <div class="shell nav">
+      <div class="brand">
+        <h1>Name: Je Koff</h1>
+        <p>Profession: Software Developer (IT)</p>
+        <p class="muted">Contact: <a href="mailto:jekoff3@gmail.com">jekoff3@gmail.com</a> | <a href="#" target="_blank" rel="noopener">LinkedIn</a> | <a href="#" target="_blank" rel="noopener">GitHub</a></p>
+      </div>
+      <nav class="navlinks" aria-label="Primary">
+        <a class="chip" href="#about">About</a>
+        <a class="chip" href="#bento">Highlights</a>
+        <a class="chip" href="#projects">Projects</a>
+        <a class="chip" href="#skills">Skills</a>
+        <a class="chip" href="#experience">Experience</a>
+        <a class="chip" href="#cv">CV</a>
+        
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell" id="top" tabindex="-1">
+    <!-- HERO -->
+    <section class="hero" data-tilt>
+      <div class="hero-media" aria-hidden="true">
+        <picture>
+          <source srcset="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=2200&q=80" media="(min-width:1200px)">
+          <source srcset="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80" media="(min-width:700px)">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80" alt="Minimal desk setup with code editor" width="2200" height="1200" decoding="async" loading="eager" fetchpriority="high" />
+        </picture>
+      </div>
+      <div class="hero-inner">
+        <span class="eyebrow">Performance • A11y • DX</span>
+        <h2 class="title">I craft clean, fast, Apple‑style web apps — with bento‑simple UI and production‑ready code.</h2>
+        <p class="lead">I focus on modern SPAs, design systems, and delightful micro‑interactions. My approach: measurable performance, accessible UX, and maintainable TypeScript across React/Vue/Web Components.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">See Projects</a>
+          <a class="btn" href="mailto:jekoff3@gmail.com">Contact Me</a>
+          <button class="btn" id="printCV" type="button">Print CV</button>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main id="top" class="container" tabindex="-1">
-        <!-- About Section -->
-        <section id="about" class="card">
-            <h2>About</h2>
-            <p>
-                I’m a software developer focused on building fast, accessible single‑page applications that scale.
-                My work blends pragmatic UX with robust engineering: clean architectures, observable state, and performance
-                budgets that keep Core Web Vitals in the green. I enjoy turning complex requirements into elegant UI
-                systems—documented, tested, and easy to maintain. Day to day, I ship with TypeScript, modern browser APIs,
-                and lean tooling (Vite, esbuild) across React, Vue, and Web Components. I care about accessibility, DX,
-                and automation: from CI pipelines and Lighthouse CI to end‑to‑end tests with Playwright. Outside of work,
-                I experiment with PWAs, data viz, and micro‑interactions that enhance, never hinder, usability.
-            </p>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Projects</h2>
-
-            <div class="toolbar" role="region" aria-label="Project filters">
-                <input id="projectSearch" class="input" type="search" placeholder="Search projects or tech (e.g. PWA, React, TypeScript)" aria-label="Search projects">
-                <button class="btn" id="clearSearch" type="button">Clear</button>
-                <a class="btn btn-primary" href="https://github.com/rileychen?tab=repositories" target="_blank" rel="noopener">View All Repos</a>
-            </div>
-
-            <div class="grid" id="projectList" aria-live="polite">
-                <!-- Project entries go here -->
-                <article class="project card" data-tech="typescript web-components lighthouse ci vite github-actions performance">
-                    <h3>Project Name: PerfWatch — Lighthouse CI Dashboard</h3>
-                    <p>
-                        A zero‑dependency dashboard that collects Lighthouse scores in CI and highlights regressions over time.
-                        Built for speed and portability: a single static page reads JSON artifacts, renders charts, and stores
-                        snapshots offline for quick comparisons. Teams use it to enforce performance budgets and catch layout
-                        shifts before release. Works with any CI via a tiny upload step and GitHub Actions example workflows.
-                    </p>
-                    <p class="meta">Technologies: TypeScript, Web Components, Vite, IndexedDB, GitHub Actions</p>
-                    <p><a href="https://example.com/perfwatch" target="_blank" rel="noopener">Live Demo</a> | <a href="https://github.com/rileychen/perfwatch" target="_blank" rel="noopener">GitHub Repository</a></p>
-                    <ul class="chips" aria-label="Technology tags">
-                        <li class="chip">TypeScript</li><li class="chip">Web Components</li><li class="chip">Lighthouse</li><li class="chip">CI/CD</li>
-                    </ul>
-                </article>
-
-                <article class="project card" data-tech="html css javascript accessibility spa template performance">
-                    <h3>Project Name: Devfolio — Single‑File Portfolio Template</h3>
-                    <p>
-                        A performance‑first portfolio in one HTML file (this project). It ships with system fonts, no image
-                        dependencies, a11y‑friendly landmarks, dark mode, and a tiny JS layer for filtering and theming.
-                        Designed to score highly on Core Web Vitals and to be easy to fork and customize. Progressive
-                        enhancement ensures everything remains usable without JavaScript.
-                    </p>
-                    <p class="meta">Technologies: HTML5, CSS3, JavaScript (ES6+)</p>
-                    <p><a href="https://example.com/devfolio" target="_blank" rel="noopener">Live Demo</a> | <a href="https://github.com/rileychen/devfolio" target="_blank" rel="noopener">GitHub Repository</a></p>
-                    <ul class="chips" aria-label="Technology tags">
-                        <li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JavaScript</li><li class="chip">A11y</li>
-                    </ul>
-                </article>
-
-                <article class="project card" data-tech="pwa vanilla-js indexeddb dnd accessibility offline">
-                    <h3>Project Name: TaskTrackr — Kanban PWA</h3>
-                    <p>
-                        An offline‑first Kanban board with drag‑and‑drop, keyboard navigation, and instant search. Uses
-                        IndexedDB for persistence and a service worker for caching, making it reliable on flaky networks.
-                        The UI is built with vanilla JS to minimize bundle size and maximize runtime performance, while
-                        ARIA patterns and focus management ensure accessibility for all users.
-                    </p>
-                    <p class="meta">Technologies: Vanilla JS, IndexedDB, Service Worker, Drag‑and‑Drop API</p>
-                    <p><a href="https://example.com/tasktrackr" target="_blank" rel="noopener">Live Demo</a> | <a href="https://github.com/rileychen/tasktrackr" target="_blank" rel="noopener">GitHub Repository</a></p>
-                    <ul class="chips" aria-label="Technology tags">
-                        <li class="chip">PWA</li><li class="chip">Offline</li><li class="chip">IndexedDB</li><li class="chip">D&amp;D</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="card">
-            <h2>Skills</h2>
-            <ul>
-                <!-- List your technical skills here -->
-                <li>Programming Languages: TypeScript, JavaScript (ES6+), HTML5, CSS3, SQL, Python</li>
-                <li>Frameworks: React, Vue, Svelte, Node.js/Express, Next.js, Astro</li>
-                <li>Libraries: Web Components, Lit, Redux Toolkit, TanStack Query, D3.js, Playwright</li>
-                <li>Tools: Git, Vite, esbuild, Webpack, Docker, GitHub Actions, Jest/Vitest, Cypress, Lighthouse</li>
-            </ul>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="card">
-            <h2>Experience</h2>
-            <ul>
-                <!-- Outline your work experience in reverse chronological order -->
-                <li><strong>Senior Frontend Engineer</strong>, Arcadia Systems — <em>2022 &ndash; Present</em>
-                    <ul>
-                        <li>Led migration to a modular design system and micro‑frontends; reduced initial bundle by 38% and improved LCP by 28%.</li>
-                        <li>Implemented Lighthouse CI and performance budgets; prevented regressions across 20+ SPAs.</li>
-                        <li>Mentored team on a11y and TypeScript best practices; introduced automated a11y checks in CI.</li>
-                    </ul>
-                </li>
-                <li><strong>Frontend Engineer</strong>, TechNova Labs — <em>2019 &ndash; 2022</em>
-                    <ul>
-                        <li>Built data‑heavy dashboards with React and Web Components, integrating real‑time streams.</li>
-                        <li>Shipped a PWA for field teams with offline sync, cutting support tickets by 45%.</li>
-                        <li>Owned E2E testing strategy with Playwright, increasing coverage to 90%+ on critical flows.</li>
-                    </ul>
-                </li>
-                <li><strong>Software Developer</strong>, Freelance/Contract — <em>2016 &ndash; 2019</em>
-                    <ul>
-                        <li>Delivered bespoke SPAs for startups; focused on performance, accessibility, and maintainable code.</li>
-                        <li>Set up CI/CD pipelines, monitoring, and error reporting to accelerate feedback loops.</li>
-                    </ul>
-                </li>
-                <!-- Add more experience entries as needed -->
-            </ul>
-        </section>
-
-        <p class="footer-note">© <span id="year"></span> Riley Chen — Built with HTML, CSS, and a sprinkle of JS. No external assets.</p>
-        <p class="footer-note"><a class="btn" href="#top">Back to top ↑</a></p>
-    </main>
-
-    <noscript>
-        <div class="container card" role="note" aria-live="polite">
-            JavaScript is disabled. The site remains fully usable, but search and theme toggling are unavailable.
+    <!-- Bento Highlights -->
+    <section id="bento" aria-label="Highlights" style="margin-block:clamp(20px,6vw,42px)">
+      <div class="bento">
+        <div class="tile span-3" data-tilt>
+          <h3>About</h3>
+          <p>I’m a software developer focused on performant, accessible single‑page apps. I turn complex requirements into elegant, maintainable interfaces with strong testing and CI/CD.</p>
         </div>
-    </noscript>
+        <div class="tile span-2" data-tilt>
+          <h3>Location</h3>
+          <p class="muted">Based in EU • Remote‑friendly</p>
+          <p class="stat">CET/CEST</p>
+        </div>
+        <div class="tile span-1" data-tilt>
+          <h3>Exp</h3>
+          <p class="stat">8+ yrs</p>
+          <p class="muted">Frontend & Full‑stack</p>
+        </div>
 
-    <script>
-        // --- Theme: system preference + localStorage ---
-        (function(){
-            const root = document.documentElement;
-            const key = 'theme-preference';
-            const saved = localStorage.getItem(key);
-            const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const current = saved ?? (systemDark ? 'dark' : 'light');
-            const apply = t => { root.setAttribute('data-theme', t); localStorage.setItem(key, t); };
+        <div class="tile span-2" data-tilt>
+          <h3>Focus</h3>
+          <ul class="chips">
+            <li class="chip">TypeScript</li>
+            <li class="chip">React/Vue</li>
+            <li class="chip">Design Systems</li>
+            <li class="chip">PWAs</li>
+          </ul>
+        </div>
+        <div class="tile span-2" data-tilt>
+          <h3>Availability</h3>
+          <p class="muted">Open to impactful projects & roles.</p>
+          <a class="btn" href="mailto:jekoff3@gmail.com">Email Me</a>
+        </div>
+        <div class="tile span-2" data-tilt>
+          <h3>Certs</h3>
+          <p class="muted">Web Accessibility, Cloud Fundamentals</p>
+        </div>
+      </div>
+    </section>
 
-            apply(current);
-            document.getElementById('themeToggle')?.addEventListener('click', () => {
-                apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-            });
-            // reflect system changes if user hasn't chosen
-            if (saved == null && window.matchMedia) {
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => apply(e.matches ? 'dark' : 'light'));
-            }
-        })();
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="toolbar" role="region" aria-label="Project filters">
+        <input id="projectSearch" class="input" type="search" placeholder="Search projects or tech (e.g. PWA, React, TypeScript)" aria-label="Search projects">
+        <button class="btn" id="clearSearch" type="button">Clear</button>
+        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">All Repos</a>
+      </div>
 
-        // --- Projects: simple client-side filter (text + tech tags) ---
-        (function(){
-            const input = document.getElementById('projectSearch');
-            const clear = document.getElementById('clearSearch');
-            const list  = document.getElementById('projectList');
-            const cards = Array.from(list.querySelectorAll('.project'));
+      <div class="bento" id="projectList" aria-live="polite">
+        <!-- Project 1 -->
+        <article class="card span-3" data-tilt data-tech="typescript web-components lighthouse ci vite github-actions performance">
+          <div class="project-media" aria-hidden="true">
+            <picture>
+              <source srcset="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80" media="(min-width:1024px)" />
+              <source srcset="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1000&q=80" media="(min-width:640px)" />
+              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&q=80" alt="Multiple monitors showing code and graphs" loading="lazy" decoding="async" />
+            </picture>
+          </div>
+          <h3>Project Name: PerfWatch — Lighthouse CI Dashboard</h3>
+          <p>A zero‑dependency dashboard that collects Lighthouse scores in CI and highlights regressions over time. Single static page reads JSON artifacts, renders charts, and stores snapshots offline to enforce performance budgets.</p>
+          <p class="muted">Technologies: TypeScript, Web Components, Vite, IndexedDB, GitHub Actions</p>
+          <p><a href="#" target="_blank" rel="noopener">Live Demo</a> | <a href="#" target="_blank" rel="noopener">GitHub Repository</a></p>
+          <ul class="chips" aria-label="Technology tags"><li class="chip">TypeScript</li><li class="chip">Web Components</li><li class="chip">Lighthouse</li><li class="chip">CI/CD</li></ul>
+        </article>
 
-            const filter = (q) => {
-                const needle = q.trim().toLowerCase();
-                cards.forEach(card => {
-                    const hay = (card.textContent + ' ' + (card.getAttribute('data-tech') || '')).toLowerCase();
-                    card.style.display = hay.includes(needle) ? '' : 'none';
-                });
-            };
+        <!-- Project 2 -->
+        <article class="card span-3" data-tilt data-tech="html css javascript accessibility spa template performance">
+          <div class="project-media" aria-hidden="true">
+            <picture>
+              <source srcset="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80" media="(min-width:1024px)" />
+              <source srcset="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=80" media="(min-width:640px)" />
+              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80" alt="Team collaborating over laptops and UI sketches" loading="lazy" decoding="async" />
+            </picture>
+          </div>
+          <h3>Project Name: Devfolio — Single‑File Portfolio Template</h3>
+          <p>Performance‑first portfolio in one HTML file: system fonts, a11y landmarks, dark mode, and a tiny JS layer for filtering/theming. A clean starter for developers aiming for Core Web Vitals green scores.</p>
+          <p class="muted">Technologies: HTML5, CSS3, JavaScript (ES6+)</p>
+          <p><a href="#" target="_blank" rel="noopener">Live Demo</a> | <a href="#" target="_blank" rel="noopener">GitHub Repository</a></p>
+          <ul class="chips" aria-label="Technology tags"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JavaScript</li><li class="chip">A11y</li></ul>
+        </article>
 
-            input?.addEventListener('input', (e) => filter(e.target.value));
-            clear?.addEventListener('click', () => { input.value=''; filter(''); input.focus(); });
-        })();
+        <!-- Project 3 -->
+        <article class="card span-3" data-tilt data-tech="pwa vanilla-js indexeddb dnd accessibility offline">
+          <div class="project-media" aria-hidden="true">
+            <picture>
+              <source srcset="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1600&q=80" media="(min-width:1024px)" />
+              <source srcset="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1000&q=80" media="(min-width:640px)" />
+              <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=700&q=80" alt="Electronics kit with code on a screen" loading="lazy" decoding="async" />
+            </picture>
+          </div>
+          <h3>Project Name: TaskTrackr — Kanban PWA</h3>
+          <p>Offline‑first Kanban board with drag‑and‑drop, keyboard navigation, and instant search. Service worker caching and IndexedDB persistence ensure reliability on flaky networks, with ARIA patterns for strong accessibility.</p>
+          <p class="muted">Technologies: Vanilla JS, IndexedDB, Service Worker, Drag‑and‑Drop API</p>
+          <p><a href="#" target="_blank" rel="noopener">Live Demo</a> | <a href="#" target="_blank" rel="noopener">GitHub Repository</a></p>
+          <ul class="chips" aria-label="Technology tags"><li class="chip">PWA</li><li class="chip">Offline</li><li class="chip">IndexedDB</li><li class="chip">D&amp;D</li></ul>
+        </article>
+      </div>
+    </section>
 
-        // --- Footer year ---
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="card" data-tilt>
+        <ul>
+          <li>Programming Languages: TypeScript, JavaScript (ES6+), HTML5, CSS3, SQL, Python</li>
+          <li>Frameworks: React, Vue, Svelte, Node.js/Express, Next.js, Astro</li>
+          <li>Libraries: Web Components, Lit, Redux Toolkit, TanStack Query, D3.js, Playwright</li>
+          <li>Tools: Git, Vite, esbuild, Webpack, Docker, GitHub Actions, Jest/Vitest, Cypress, Lighthouse</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="card" data-tilt>
+        <ul class="timeline">
+          <li>
+            <strong>Senior Frontend Engineer</strong>, Arcadia Systems — <em>2022 – Present</em>
+            <ul>
+              <li>Led migration to a modular design system and micro‑frontends; reduced bundle by 38% and improved LCP by 28%.</li>
+              <li>Implemented Lighthouse CI & performance budgets across 20+ SPAs.</li>
+              <li>Mentored team on a11y and TS best practices; automated a11y checks in CI.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Frontend Engineer</strong>, TechNova Labs — <em>2019 – 2022</em>
+            <ul>
+              <li>Built real‑time dashboards with React & Web Components.</li>
+              <li>Launched a PWA with offline sync, cutting support tickets by 45%.</li>
+              <li>Owned Playwright E2E strategy; 90%+ coverage on critical flows.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Software Developer</strong>, Freelance/Contract — <em>2016 – 2019</em>
+            <ul>
+              <li>Delivered bespoke SPAs with an emphasis on performance and maintainability.</li>
+              <li>Set up CI/CD pipelines, monitoring, and error reporting.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CV (Print‑ready) -->
+    <section id="cv">
+      <h2>CV</h2>
+      <div class="card cv" data-tilt>
+        <div>
+          <h3>Profile</h3>
+          <p>I’m an IT‑oriented software developer specializing in performant SPAs and accessible design systems. I enjoy building developer tooling and automation that keep teams fast and safe.</p>
+          <h3>Experience (selected)</h3>
+          <ul>
+            <li><strong>Arcadia Systems</strong> — Senior Frontend Engineer (2022–Present)
+              <ul>
+                <li>Micro‑frontends, design system ownership, performance budgets.</li>
+              </ul>
+            </li>
+            <li><strong>TechNova Labs</strong> — Frontend Engineer (2019–2022)
+              <ul>
+                <li>Real‑time data viz, PWA offline strategies, testing leadership.</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>Education</h3>
+          <p>B.Sc. in Computer Science (or equivalent experience)</p>
+          <h3>Contact</h3>
+          <p><a href="mailto:jekoff3@gmail.com">jekoff3@gmail.com</a> · <a href="#" target="_blank" rel="noopener">LinkedIn</a> · <a href="#" target="_blank" rel="noopener">GitHub</a></p>
+        </div>
+        <aside>
+          <h3>Core Skills</h3>
+          <ul>
+            <li>TypeScript, React/Vue/Svelte</li>
+            <li>Node.js, REST/GraphQL</li>
+            <li>Design Systems, a11y</li>
+            <li>PWAs, Service Workers</li>
+            <li>CI/CD, GitHub Actions</li>
+          </ul>
+          <h3>Highlights</h3>
+          <ul>
+            <li>Improved LCP by 28% on flagship product</li>
+            <li>Shipped offline‑first PWA for field teams</li>
+            <li>Introduced Lighthouse CI + budgets</li>
+          </ul>
+          <h3>Tech</h3>
+          <ul>
+            <li>Vite, esbuild, Webpack</li>
+            <li>Playwright, Cypress, Vitest/Jest</li>
+            <li>D3, TanStack Query, Redux Toolkit</li>
+          </ul>
+        </aside>
+      </div>
+      <p class="muted">Tip: Use the “Print CV” button above to export to PDF with your browser.</p>
+    </section>
+
+    <p class="footer">© <span id="year"></span> Je Koff — Built with semantic HTML, modern CSS, and a hint of JS. Stock photos via Unsplash.</p>
+    <p class="footer"><a class="btn" href="#top">Back to top ↑</a></p>
+  </main>
+
+  <noscript>
+    <div class="shell card" role="note" aria-live="polite">JavaScript is disabled. The site remains fully usable, but search, tilt and progress effects are unavailable.</div>
+  </noscript>
+
+  <script>
+    // Theme (system + manual)
+    (function(){
+      const root = document.documentElement;
+      const key = 'theme-preference';
+      const saved = localStorage.getItem(key);
+      const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = saved ?? (systemDark ? 'dark' : 'light');
+      const apply = t => { root.setAttribute('data-theme', t); localStorage.setItem(key, t); };
+      apply(initial);
+      document.getElementById('themeToggle')?.addEventListener('click', () => {
+        apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      });
+      if (saved == null && window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => apply(e.matches ? 'dark' : 'light'));
+      }
+    })();
+
+    // Scroll progress
+    (function(){
+      const bar = document.getElementById('progressbar');
+      const set = () => {
+        const h = document.documentElement;
+        const sc = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+        bar.style.transform = `scaleX(${Math.max(0, Math.min(1, sc))})`;
+      };
+      set();
+      window.addEventListener('scroll', set, {passive:true});
+      window.addEventListener('resize', set);
+    })();
+
+    // Active link + header style on scroll
+    (function(){
+      const links = Array.from(document.querySelectorAll('header .navlinks a[href^="#"]'));
+      const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const headerEl = document.querySelector('header');
+      const activate = (id) => {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      };
+      if (sections.length){
+        const io = new IntersectionObserver((entries) => {
+          const vis = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio - a.intersectionRatio)[0];
+          if (vis && vis.target.id) activate(vis.target.id);
+        }, { rootMargin: '-20% 0px -70% 0px', threshold: [0.2,0.6] });
+        sections.forEach(s => io.observe(s));
+      }
+      const onScroll = () => {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        headerEl?.classList.toggle('scrolled', y > 6);
+      };
+      onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+    })();
+
+    // Project filter
+    (function(){
+      const input = document.getElementById('projectSearch');
+      const clear = document.getElementById('clearSearch');
+      const list = document.getElementById('projectList');
+      if (!list) return;
+      const cards = Array.from(list.querySelectorAll('[data-tech]'));
+      const filter = q => {
+        const needle = q.trim().toLowerCase();
+        cards.forEach(card => {
+          const hay = (card.textContent + ' ' + (card.getAttribute('data-tech')||'')).toLowerCase();
+          card.style.display = hay.includes(needle) ? '' : 'none';
+        });
+      };
+      input?.addEventListener('input', e => filter(e.target.value));
+      clear?.addEventListener('click', () => { input.value=''; filter(''); input.focus(); });
+    })();
+
+    // Reveal on scroll
+    (function(){
+      const els = Array.from(document.querySelectorAll('.card, .tile, .hero'));
+      els.forEach(el => el.style.opacity = '.001');
+      const show = el => { el.style.transition = 'opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1)'; el.style.opacity = '1'; };
+      if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(({target, isIntersecting}) => { if(isIntersecting){ show(target); io.unobserve(target); } });
+      }, {rootMargin: '0px 0px -10% 0px', threshold: .15});
+      els.forEach(el => io.observe(el));
+    })();
+
+    // Tilt effect
+    (function(){
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+      const els = document.querySelectorAll('[data-tilt]');
+      els.forEach(el => {
+        let raf = 0;
+        const strength = 8;
+        const onMove = (e) => {
+          const r = el.getBoundingClientRect();
+          const cx = r.left + r.width/2; const cy = r.top + r.height/2;
+          const dx = (e.clientX - cx) / (r.width/2); const dy = (e.clientY - cy) / (r.height/2);
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            el.style.transform = `rotateX(${(-dy*strength).toFixed(2)}deg) rotateY(${(dx*strength).toFixed(2)}deg) translateY(-2px)`;
+          });
+        };
+        const reset = () => { cancelAnimationFrame(raf); el.style.transform = ''; };
+        el.addEventListener('mousemove', onMove);
+        el.addEventListener('mouseleave', reset);
+      });
+    })();
+
+    // Image hardening: add referrerpolicy + SVG fallback on error
+    (function(){
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%237c6cff' offset='0%'/><stop stop-color='%2322d3ee' offset='50%'/><stop stop-color='%23ff8a00' offset='100%'/></linearGradient></defs><rect width='100%' height='100%' fill='url(#g)'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Inter,system-ui' font-size='28'>Image unavailable</text></svg>`;
+      const fallback = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      document.querySelectorAll('img').forEach(img => {
+        img.setAttribute('referrerpolicy','no-referrer');
+        img.addEventListener('error', () => {
+          img.src = fallback;
+          const pic = img.closest('picture');
+          if (pic) pic.querySelectorAll('source').forEach(s => s.remove());
+        }, { once: true });
+      });
+    })();
+
+    // Footer year & Print
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('printCV')?.addEventListener('click', () => window.print());
+  </script>
 </body>
 </html>
